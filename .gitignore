@@ -1,14 +1,32 @@
-# Prevent accidental release of health records and analysis outputs
+# Default-deny participant-level and health export files.
 *.csv
+*.tsv
 *.json
+*.jsonl
 *.xml
+*.xml.gz
 *.zip
+*.parquet
+*.feather
 *.xlsx
+*.xls
 *.sqlite
+*.sqlite3
+*.db
+*.fit
+*.gpx
+*.kml
+*.pdf
 outputs/
 private/
-data/
+raw/
+health_export/
 __pycache__/
 .pytest_cache/
+.ruff_cache/
 .env
 .DS_Store
+# Explicit, curated public aggregated tables only.
+!data/
+data/*
+!data/public_*.csv

@@ -1,100 +1,111 @@
 # Sleep Sweet Spot
-### From wearable data to better everyday decisions
+### From a decade of sleep records to better-informed decisions
 
-**Rogelio Moreno Guinea | Exploratory longitudinal data analysis | October 2026**
+**Rogelio Moreno Guinea | Retrospective case study | Historical export: September 2016–October 1, 2026**
+
+**Status:** Stage 1, retrospective. Findings are descriptive and specific to one participant.
 
 > Data rarely speaks for itself. Context turns information into decisions.
 
-## Why this project exists
+## The question that started the investigation
 
-For a decade, I collected sleep metrics without knowing what to do with each daily report. A video about biphasic sleep brought back memories of nights in which I woke up and slept again. But memorable interruptions are not a representative sample of every night.
+After recognizing my own experience in a discussion of *biphasic sleep*, I asked a simple question: are nights with two substantial episodes truly a recurring pattern, or are those nights simply easier to remember?
 
-The initial hypothesis became a broader investigation:
+What began as a question about interruptions became a broader investigation into the **quality of the measurements**, the relationship between sleep timing and subsequent nights, and the value of questioning intuitive explanations. The goal of Stage 1 is to identify reliable historical patterns, investigate competing interpretations, and understand which findings can inform everyday decisions. Whether those decisions improve daytime functioning is a **different question**, reserved for a later prospective study.
 
-**What can changing wearable measurements reveal about sleep patterns, and how can that knowledge improve the choices we make during waking life?**
+### Scope in one glance
 
-The goal is not to maximize sleep duration, REM or Deep. It is to understand the **two-way relationship between daytime activity and sleep**, test competing explanations, and evaluate actions that may improve daytime functioning.
-
-## What we have learned so far
-
-### 1. Going to sleep later does not imply waking proportionally later
-
-In **2,058 eligible Apple Watch sleep windows (2020–2026)**, a one-hour later recorded onset was associated with approximately **30 minutes less recorded sleep** and a **24-minute later final sleep time**, in descriptive models adjusted for calendar variables.
-
-| Recorded sleep onset (local) | Share with ≥5 h | Share with ≥7 h |
-| :-- | --: | --: |
-| 20:00–21:59 | 99.1% | 75.9% |
-| 22:00–23:59 | 94.7% | 53.3% |
-| 00:00–01:59 | 85.7% | 22.1% |
-| 02:00–04:59 | 53.9% | 4.3% |
-
-**Decision implication:** as a social evening continues, I can now ask whether staying longer is worth potentially having less sleep. I may still choose to stay. Better information changes the *decision frame*, not necessarily the choice.
-
-**Important:** five hours is an illustrative threshold for analyzing distributions, **not** a recommended minimum or an established threshold of healthy daytime performance. These frequencies are associations, not intervention success probabilities.
-
-### 2. A short night is not automatically paid back the next night
-
-Among **219 complete three-night sequences** starting below five hours, the observed median durations were **4 h 30 min → 6 h 51 min → 6 h 47 min**. The return toward typical duration is not proof of full recovery; regression to the mean is an alternative explanation.
-
-**Decision implication:** it would be unwise to assume an unusually short night is guaranteed to be fully compensated.
-
-### 3. A remembered split night does not establish habitual biphasic sleep
-
-Under one explicitly defined episode rule (≥60 minutes between sleep episodes, with ≥60 minutes of sleep on both sides), **105 of 1,377** windows in a stricter **2022–2026 staged-sleep cohort** met the split criterion. The frequency changes with the gap definition.
-
-**Decision implication:** compare interruptions by onset time, episodes and subsequent functioning rather than diagnosing a habit from memorable events.
-
-### 4. Ten years do not mean one measurement system
-
-| Era | Recorded observation | Key limitation |
+| Source period | What it contributes | Comparable measures? |
 | --- | --- | --- |
-| 2016 onward | Clock / time in bed | Time in bed is not measured sleep |
-| 2018 onward | Sleep++ estimated intervals | App methods differ from later Watch estimates |
-| 2020 onward | Apple Watch sleep estimates | No detailed stage architecture initially |
-| September 2022 onward | Watch Core, Deep, REM and Awake estimates | Stage detection and algorithms can change |
+| 2016 onward | Apple Health sleep-related records, including iPhone Clock and other sources | **Not** the same as Watch-measured sleep |
+| 2018 onward | Sleep++ app estimates | Separate algorithm, overlapping other sources |
+| 2020–2026 | Watch-labeled sleep intervals | Main timing and consecutive-night analysis |
+| Sep 2022–Sep 2026 | Watch-labeled Core / Deep / REM / Awake | Architecture and split-episode analyses |
 
-**Decision implication:** do not treat apparent trends across device eras as purely physiological changes. Each analysis must document its sources and comparability.
+The full sleep-only source export contains **60,903 interval records**. These are not 60,903 nights, and were **not** pooled into one ten-year comparable sleep-duration series. Using an Apple Watch during this period does not mean every Apple Health record originated on the Watch: earlier Clock / time-in-bed entries can be attributed to an iPhone. **Sleep++ is a third-party app**, not an Apple Watch model.
 
-## How the investigation works
+## Four findings
 
-1. **Observe and question.** Begin with lived experience and possible explanations, not a predetermined conclusion.
-2. **Audit measurement.** Track data sources, gaps, intervals, timezone metadata, overlap, stage coverage and device eras.
-3. **Explore hypotheses.** Examine timing, continuity, split episodes, subsequent nights and physiological measures with appropriately defined cohorts.
-4. **Test robustness.** Vary episode rules, cohort eligibility and calendar adjustments; distinguish unmeasured time from recorded Awake.
-5. **Identify choices.** Translate a finding into a concrete, personally relevant decision or explain why it is not actionable.
-6. **Evaluate the outcome.** Since October 15, 2026, a *private* prospective diary has recorded daytime energy, mental clarity, sleepiness, waking experience and context. Both directions matter: **day → night → next day**.
+### 1. A later sleep start is not matched by an equally later finish
 
-The diary is too new to demonstrate a personal optimal sleep duration or the impact of any proposed intervention.
+From **2,058 eligible Watch-labeled sleep windows** (2020–2026), a one-hour later first recorded sleep start was associated with:
 
-## Reproducibility without exposing personal health records
+- **29.73 fewer minutes** of recorded sleep, exploratory 95% CI **−32.05 to −27.42** minutes.
+- **23.76 minutes later** final recorded sleep time, 95% CI **21.38 to 26.13** minutes.
 
-This repository includes a **synthetic Python demonstration** and automated checks. No real night-level records or personal diary content are included. The fictional example demonstrates grouping by sleep onset and pairing actual consecutive calendar days. It **does not generate or reproduce** the private research estimates above.
+These are calendar-adjusted associations (year, month, weekday) with uncertainty clustered by month-year, **not causal effects**. Start, end, and duration are also mathematically connected; the coefficients should not be read as independent mechanisms.
 
-Run locally with Python 3.9 or newer:
+![Share of qualifying windows reaching at least five and seven recorded hours by onset band](figures/onset_thresholds.png)
 
-```bash
-python demo_synthetic.py
-python -m unittest discover -s tests -v
-```
+| Recorded first-sleep start | Eligible windows | Reached ≥5h | Reached ≥7h |
+| --- | ---: | ---: | ---: |
+| 20:00–21:59 | 116 | 115 | 88 |
+| 22:00–23:59 | 1,224 | 1,159 | 653 |
+| 00:00–01:59 | 462 | 396 | 102 |
+| 02:00–04:59 | 256 | 138 | 11 |
 
-The historical aggregate findings came from a separate private Apple Health analysis. The underlying participant-level data are intentionally not public, so independent reproduction of those specific estimates requires access to the protected data. Synthetic test success validates code examples, not physiological validity.
+**Practical implication:** as an enjoyable evening continues, I can consciously ask whether staying longer is worth the possibility of reduced sleep. I might still choose to stay. Evidence improves the *decision*, rather than prescribing the answer. The five-hour threshold is **a descriptive cut point, not a recommended sleep duration**.
 
-## What this project does **not** establish
+### 2. The next night is not a guaranteed full recovery
 
-- That five, six or seven hours are sufficient for this individual, much less for others.
-- That later bedtime **causes** worse next-day functioning.
-- That more REM or Deep is necessarily better, or can be reliably controlled at will.
-- That an association with heart rate, HRV, lunar phase or a supplement proves its effect.
-- That an observational single-participant analysis can be generalized to another person's sleep.
+There are **1,933** pairs of genuinely consecutive qualifying windows and **1,817** complete three-window sequences. Among **219 sequences** whose first window records under five hours, median recorded durations are:
 
-## Next investigation
+**4h 30m → 6h 51m → 6h 47m**.
 
-Link the **day before**, the **night**, and the **following day** as separate time-indexed observations. Explore patterns of sleep onset, duration, continuity, activities and fatigue; then evaluate potential actions against daytime functioning and enjoyment, rather than a single device score.
+This pattern is compatible with return toward typical values. **It cannot measure physiological sleep debt or prove full recovery.** Regression to the mean, circumstances and selection must be considered.
 
-This is a **living case study**: publication of defensible findings comes before any claim of a personalized sweet spot.
+![Observed transitions between consecutive recorded sleep durations](figures/consecutive_nights.png)
 
-**Skills demonstrated:** Python, longitudinal analytics, measurement auditing, exploratory statistics, sensitivity analysis, privacy-aware research design, and translation of evidence into decisions.
+### 3. A memorable split night is not the dominant pattern
 
----
+The strict, reproducible **staged cohort has 1,381** eligible windows (September 2022–September 2026). **105 (7.6%)** meet an operational split definition: a gap of at least 60 minutes between sleep episodes, with at least 60 minutes of recorded sleep on each side. Under 90- and 120-minute gap thresholds the counts are **74** and **48** respectively.
 
-*Single-participant, exploratory, non-clinical research. Historical data cut off October 1, 2026. Never upload private Apple Health exports, individual sleep tables, identifiable events or prospective diary entries to this repository.*
+This does not diagnose or rule out physiological biphasic sleep. A gap can include **unmeasured** time, which is not the same as confirmed Awake. These are *noon-to-noon measurement containers* and may occasionally combine distinct physiological episodes.
+
+An earlier research draft reported **1,377** eligible windows after excluding four context-specific windows. For transparent public reproducibility, this release uses **1,381 with no private date-specific exclusions**; the split count stays at 105. The alternate sample is documented but is **not** the public main estimate.
+
+### 4. Data provenance can change the story
+
+Record categories, app algorithms and device/software eras evolved over ten years. Mixing iPhone *InBed*, Sleep++ *AsleepUnspecified* and Apple Watch stage-level estimates as if they were identical measures would create misleading long-term trends. This study therefore separates **source**, **measurement type** and **date range**; it does not claim that ten-year differences represent changes in physiology.
+
+## Reproducibility and privacy
+
+- [Methods and filtering choices](METHODS.md)
+- [Detailed numerical results and interpretive limits](RESULTS.md)
+- [Reproducing findings and running the code](REPRODUCIBILITY.md)
+- [What was considered, what was deferred](RESEARCH_LEDGER.md)
+- [Data dictionary and disclosure policy](DATA_PRIVACY.md)
+- [Actual group-level, privacy-reviewed candidate tables](data/public_onset_counts.csv)
+- [Consecutive-night transition matrix](data/public_next_night_matrix.csv)
+- [Stage-level summary](data/public_stage_summary.csv)
+
+The public CSVs contain **real aggregates, not synthetic observations**. They allow re-creating the charts and percentages, but **not** independently verifying every regression or interval-reconstruction decision. The executable research pipeline can operate on one's own permitted **sleep-only** Apple Health JSON export. The original participant-level health records, exact nightly dates and free-text context are **not included**.
+
+### Quick start
+
+
+Environment: Python **3.10+**. Install the dependencies in an isolated virtual environment:
+
+
+
+
+    python -m pip install -r requirements.txt
+    python -m pip install -r requirements-figures.txt
+
+    python -m pytest -q
+    python scripts/build_figures.py
+
+The synthetic demos (`demo_synthetic.py`, `demo_episodes.py`, `demo_statistics.py`) contain no personal records. For full analysis against your **own** authorized sleep-only JSON, see [REPRODUCIBILITY.md](REPRODUCIBILITY.md). Keep output files out of version control.
+
+## Conclusion and next question
+
+This case has already shown a practical change: a late-night choice can be made with clearer evidence about the *potential* loss of recorded sleep. It has **not yet shown that such a choice improves the following day's energy, clarity, wellbeing, or long-term health**. Stage 2, begun separately after October 15, 2026, will examine the two-way relationship **day → sleep → next day**. Those records are **not part of this retrospective study**.
+
+**Skills demonstrated:** Python, longitudinal cohort construction, interval reconciliation, timezone-sensitive processing, measurement audit, sensitivity testing, descriptive regression, data visualization, and translating evidence into decisions.
+
+*Single-participant observational research. Findings are exploratory and non-clinical. Last historical window ends October 1, 2026.*
+
+
+## License
+
+Source code is available under the [MIT License](LICENSE). The license does not grant rights to the original private health records, which are not included. Aggregated tables are shared for transparent inspection with attribution appreciated.

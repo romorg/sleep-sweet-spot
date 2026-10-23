@@ -1,0 +1,2 @@
+sample,eligible_windows,split_gap_60m,split_gap_90m,split_gap_120m,median_sleep_minutes,median_core_minutes,median_deep_minutes,median_rem_minutes,median_recorded_awake_minutes
+Apple Watch staged records; Sep 2022 to Sep 2026,1381,105,74,48,398.5,280.08,43.0,69.0,6.5
