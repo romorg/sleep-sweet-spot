@@ -1,0 +1,14 @@
+# Prevent accidental release of health records and analysis outputs
+*.csv
+*.json
+*.xml
+*.zip
+*.xlsx
+*.sqlite
+outputs/
+private/
+data/
+__pycache__/
+.pytest_cache/
+.env
+.DS_Store
